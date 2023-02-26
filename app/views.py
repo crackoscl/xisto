@@ -1,15 +1,29 @@
 from django.shortcuts import render
-from django.views.generic import ListView,View
+from django.views.generic import ListView,View,TemplateView
+from django.http import JsonResponse
 from .models import DancingDate
 
-# Create your views here.
 
+class Principal(TemplateView):
+    template_name = 'app/index.html'
 
-class Principal(View):
+class AppPage(View):
     
     def get(self,request):
-        data = DancingDate.objects.all()
-        return render(request,'app/index.html',context={'dancings':data})
-    
+        return JsonResponse({'data': list(DancingDate.objects.all().values()) })
+        
     def post(self,request):
-        pass
+        if request.POST:
+            DancingDate.objects.create(
+                sname = request.POST.get('sname'),
+                ddate = request.POST.get('ddate'),
+                ntime = request.POST.get('ntime'),
+                scontact = request.POST.get('scontact')
+            )
+            return JsonResponse({'message':'Guardado'})
+        else:
+            return JsonResponse({'message':'Error'})
+
+
+
+        

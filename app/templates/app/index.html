@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +10,26 @@
 <body>
     <h1>aqui xisto</h1>
 
-    <ul>
-        {% for item in dancings %}
-        <ul>{{item.sname }}</ul>
-        {% endfor %}
-    </ul>
+
+
+    <form id="my_form" action="{% url 'app:AppPage'%}" method="post">
+        {% csrf_token %}
+        <input type="text" name="sname">
+        <input type="date" name="ddate" id="date">
+        <input type="number" name="ntime">
+        <input type="email" name="scontact" id="contact">
+
+        <a href="#" onclick="document.forms['my_form'].submit();">Enviar</a> 
+    </form>`
+
+
+
+
+ <ul class="app">
+ </ul>
+
+
+ <script src="{% static 'app/js/main.js' %}"></script>
 
 </body>
 </html>
