@@ -1,11 +1,14 @@
 
+from django.urls import include, path
+from rest_framework import routers
+from .views import Principal,DacingView
 
-from django.urls import path
-from .views import Principal,AppPage
+router = routers.DefaultRouter()
+router.register(r'', DacingView)
 
-app_name = 'app'
-
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('',Principal.as_view(),name='principal'),
-    path('app/',AppPage.as_view(),name='AppPage')
+    path('api/', include(router.urls)),
 ]
