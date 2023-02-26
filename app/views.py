@@ -7,15 +7,11 @@ from .serializer import DancingSerializer
 
 
 class Principal(TemplateView):
-    template_name = 'app/index.html'
+    template_name = 'index.html'
 
 
 class DacingView(viewsets.ModelViewSet):
     queryset = DancingDate.objects.all()
     serializer_class = DancingSerializer
     permission_classes  = [permissions.AllowAny]
-
-
-
-
 
