@@ -4,7 +4,7 @@ from .models import DancingDate
 
 
 
-class DancingSerializer(serializers.HyperlinkedModelSerializer):
+class DancingSerializer(serializers.ModelSerializer):
     class Meta:
         model = DancingDate
         fields = '__all__'
