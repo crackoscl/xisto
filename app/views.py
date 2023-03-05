@@ -8,14 +8,6 @@ from .models import DancingDate
 from .serializer import DancingSerializer
 
 
-# class Principal(TemplateView):
-#     template_name = 'index.html'
-
-
-class Principal(TemplateView):
-    template_name = 'xisto.html'
-
-
 class DancingListApiView(ListAPIView):
     serializer_class = DancingSerializer
     #permission_classes = [permissions.AllowAny,]
