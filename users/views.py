@@ -104,7 +104,6 @@ class TokenRefresh(TokenRefreshView):
 
 
 class Logout(APIView):
-
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -113,6 +112,7 @@ class Logout(APIView):
         response.data = {"Success": "Logout"}
 
         return response
+    
 
 
 class Signup(GenericAPIView):

@@ -161,7 +161,6 @@ SIMPLE_JWT = {
 
 
     # Cookie name. Enables cookies if value is set.
-    # 'AUTH_COOKIE': 'kodea_jwt',
     # A string like "example.com", or None for standard domain cookie.
     'AUTH_COOKIE_DOMAIN': None,
     # Whether the auth cookies should be secure (https:// only).
@@ -173,6 +172,11 @@ SIMPLE_JWT = {
     'AUTH_COOKIE_SAMESITE': 'Lax',
     # This can be 'Lax', 'Strict', or None to disable the flag.
 }
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 
 
 CORS_ALLOWED_ORIGINS = [
