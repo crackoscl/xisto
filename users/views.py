@@ -39,15 +39,15 @@ class Login(APIView):
     def post(self, request, *args, **kwars):
         data = request.data
         response = Response()
-        rut = data.get('rut', None)
+        email = data.get('email', None)
         password = data.get('password', None)
-        user = authenticate(rut=rut, password=password)
+        user = authenticate(email=email, password=password)
         if user is not None:
             if user.is_active:
                 data = get_tokens_for_user(user)
                 print(settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'])
                 response.set_cookie(
-                    key='kodea_access',
+                    key='xisto_access',
                     value=data["access"],
                     expires=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
                     secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
@@ -55,7 +55,7 @@ class Login(APIView):
                     samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
                 )
                 response.set_cookie(
-                    key='kodea_refresh',
+                    key='xisto_refresh',
                     value=data["refresh"],
                     expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
                     secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
@@ -73,7 +73,7 @@ class Login(APIView):
 
 def refresh_get(request):
     try:
-        refresh_token = request.COOKIES["kodea_refresh"]
+        refresh_token = request.COOKIES["xisto_refresh"]
         print('ok')
         return JsonResponse({"refresh": refresh_token}, safe=False)
     except Exception as e:
@@ -93,7 +93,7 @@ class TokenRefresh(TokenRefreshView):
         res = Response(serializer.validated_data, status=status.HTTP_200_OK)
         res.delete_cookie("kodea_access")
         res.set_cookie(
-            key='kodea_access',
+            key='xisto_access',
             value=serializer.validated_data["access"],
             expires=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
             secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
@@ -109,7 +109,7 @@ class Logout(APIView):
 
     def post(self, request):
         response = Response()
-        response.delete_cookie('kodea_access')
+        response.delete_cookie('xisto_access')
         response.data = {"Success": "Logout"}
 
         return response

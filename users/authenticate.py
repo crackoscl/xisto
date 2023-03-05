@@ -23,7 +23,7 @@ class CustomAuthentication(JWTAuthentication):
         header = self.get_header(request)
 
         if header is None:
-            raw_token = request.COOKIES.get('kodea_access') or None
+            raw_token = request.COOKIES.get('xisto_access') or None
         else:
             raw_token = self.get_raw_token(header)
 
