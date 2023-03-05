@@ -1,6 +1,7 @@
 
 from django.urls import include, path
 from rest_framework.schemas import get_schema_view
+from rest_framework import permissions
 # from rest_framework import routers
 from .views import Principal,DancingListApiView,DacingCreateApiView,DacingDestroyApiview,DacingRetriApiView,DacingUpdateApiview
 
@@ -15,12 +16,7 @@ from .views import Principal,DancingListApiView,DacingCreateApiView,DacingDestro
 # ]
 
 urlpatterns = [
-    path('',Principal.as_view(),name='principal'),
-    path('api/', get_schema_view(
-        title="Xisto pruebas",
-        description="API for all things …",
-        version="1.0.0"
-    ), name='openapi-schema'),
+     path('',Principal.as_view(),name='principal'),
      path('api/list_dacing/',DancingListApiView.as_view(),name='list_dacing'),
      path('api/create_dacing/',DacingCreateApiView.as_view(),name='create_dacing'),
      path('api/retriview_dancing/<str:pk>/',DacingRetriApiView.as_view(),name='retriview_dacing'),

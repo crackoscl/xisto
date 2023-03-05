@@ -14,6 +14,7 @@ class Principal(TemplateView):
 
 class DancingListApiView(ListAPIView):
     serializer_class = DancingSerializer
+    #permission_classes = [permissions.AllowAny,]
     queryset = DancingDate.objects.all()
 
 
